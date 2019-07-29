@@ -23,10 +23,12 @@ def response():
 
     data = back_end_interface.get(company_name, ticker, date)
 
-    if data is not None:
+    if data == "non-biopharma":
+        return render_template('index.html', non_bio=data)
+    elif data is not None:
         return render_template('index.html', data_=data)
     else:
-        return render_template('index.html', null = True)
+        return render_template('index.html', null=True)
 
 
 if __name__ == '__main__':

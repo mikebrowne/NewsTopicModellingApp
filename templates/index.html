@@ -27,6 +27,10 @@
     <div id="article-section">
         <h2>Article and Company Data</h2>
         <div id="pop-up-section">
+            {% if non_bio %}
+            <p id="non-bio">The company was not a biopharmaceutical company</p>
+            {% endif %}
+
             {% if data_ %}
             <p id="company-name-output">{{data_["company_name"]}} ({{data_["ticker"]}}) - {{data_["date"].date()}}</p>
             <p id="industry">Industry: {{data_["industry"]}}</p>
