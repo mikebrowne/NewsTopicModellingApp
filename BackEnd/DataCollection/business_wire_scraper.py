@@ -5,7 +5,6 @@
 '''
 
 from selenium import webdriver
-import sys
 from BackEnd.DataCollection.business_wire_scraper_functionality import find_article, scrape_articles
 
 
@@ -34,9 +33,7 @@ class BusinessWireScraper:
     @staticmethod
     def _scrape_individual_data__(company_name, ticker, date, browser):
         result = find_article(company_name, date, browser)
-        sys.stdout.write("After find Article: {}".format(result))
         result["article"] = scrape_articles(result["link"], browser)
-        sys.stdout.write("Immediately after scraper: {}".format(result))
         result["ticker"] = ticker
 
         return result
