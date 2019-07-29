@@ -67,7 +67,7 @@ class MarketWatchScraper:
 
 
 def test_function():
-    scraper = YahooFinanceScraper()
+    scraper = MarketWatchScraper()
     res = scraper.collect("Acadia Pharmaceuticals", "ACAD")
 
     return str(res)
