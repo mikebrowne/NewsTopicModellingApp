@@ -14,12 +14,12 @@ class BackEndInterface:
 
     def get(self, company_name, ticker, date):
 
+        article_data = self.bw_scraper.collect(company_name, ticker, date)
+        article_data["company_name"] = company_name
+
+        sys.stdout.write("article keys before mw scraper: {}".format(article_data.keys()))
+
         try:
-            article_data = self.bw_scraper.collect(company_name, ticker, date)
-            article_data["company_name"] = company_name
-
-            sys.stdout.write("article keys before mw scraper: {}".format(article_data.keys()))
-
             company_data = self.mw_scraper.collect(company_name, ticker)
             #for key, val in company_data.items():
             #    article_data[key] = val
