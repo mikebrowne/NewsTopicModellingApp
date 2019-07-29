@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, Response
 #from data_collection import scrape
 from BackEnd.main import BackEndInterface
 import datetime as dt
+import sys
 
 app = Flask(__name__)
 
