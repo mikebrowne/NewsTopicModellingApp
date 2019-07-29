@@ -8,7 +8,7 @@ the industry and sector of the company in question.
 from selenium import webdriver
 import os
 
-from market_watch_scraper_functionality import scrape_site
+from BackEnd.DataCollection.market_watch_scraper_functionality import scrape_site
 
 
 class MarketWatchScraper:
