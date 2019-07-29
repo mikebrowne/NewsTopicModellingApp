@@ -5,7 +5,7 @@ from BackEnd.DataCollection.market_watch_scraper import MarketWatchScraper
 class BackEndInterface:
     def __init__(self):
         self.bw_scraper = BusinessWireScraper()
-        self.mw_scraper = MarketWatchScraper()
+        self.mw_scraper = MarketWatchScraper(test=False)
 
     def get(self, company_name, ticker, date):
 
