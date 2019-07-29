@@ -2,19 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Testing Webscraping with Heroku</title>
+    <title>Bio-Pharmaceutical News Reports</title>
 </head>
 <body>
-    <h1>Testing Webscraping with Heroku</h1>
-    <div>
-        <form action="/response" method="POST">
-            <button name="enter" type="submit">ENTER</button>
+    <h1>Bio Pharmaceutical Company News Report Analysis</h1>
+    <div id="input-section">
+        <form method="POST" action="/response">
+            <h2>Input</h2>
+            <p id="example_input">Example input:
+                "Acadia Pharmaceuticals", "ACAD", May 7, 2019</p>
+
+            <p>Type in the Company's Name:</p>
+            <input type="text" name="company-name" required="required">
+
+            <p>Type in the Company's Ticker Symbol:</p>
+            <input type="text" name="ticker" required="required">
+
+            Enter a date on or after 2000-01-01:<br>
+            <input type="date" name="date" min="2000-01-01" required="required">
+
+            <input type="submit" value="submit">
         </form>
-        {% if data_ %}
+    </div>
+    <div id="article-section">
+        <h2>Article and Company Data</h2>
+        <div id="pop-up-section">
+            {% if data_ %}
+            <p id="company-name-output">{{data_["company_name"]}} ({{data_["ticker"]}}) - {{data_["date"].date()}}</p>
+            <p id="topic-output">Topic: {{data_["topic"]}}</p>
+            <p id="title-output">{{data_["title"]}}</p>
+            <p id="article-output">{{data_["article"]}}</p>
+            {% endif %}
 
-        {{data_}}
-
-        {% endif %}
+            {% if null %}
+            <p id="failed-output">There likely is no article on that day for the company and ticker!</p>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>

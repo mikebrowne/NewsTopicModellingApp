@@ -1,23 +1,31 @@
 from flask import Flask, render_template, request, jsonify, Response
 #from data_collection import scrape
-from BackEnd.DataCollection.business_wire_scraper import test_function
+from BackEnd.main import BackEndInterface
+import datetime as dt
 
 app = Flask(__name__)
 
-# Add a single endpoint that we can use for testing
+back_end_interface = BackEndInterface()
+
+
 @app.route('/', methods=['GET'])
 def home():
     return render_template('index.html')
 
-# Add scrape button
+
 @app.route('/response', methods=["POST"])
 def response():
-    data = test_function()
+    company_name = request.form.get("company-name")
+    ticker = request.form.get("ticker")
+    date = request.form.get("date").split("-")
+    date = dt.datetime(int(date[0]), int(date[1]), int(date[2]))
+
+    data = back_end_interface.get(company_name, ticker, date)
 
     if data is not None:
         return render_template('index.html', data_=data)
     else:
-        return render_template('index.html', null=True)
+        return render_template('index.html', null = True)
 
 
 if __name__ == '__main__':

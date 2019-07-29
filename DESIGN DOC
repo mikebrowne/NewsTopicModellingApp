@@ -11,7 +11,7 @@ July 28, 2019
 * Build out the base functioning web app
     * Basically a copy of my private "FlaskWithWebScraper" repo.
 * Once the base is full functional, there will be several steps to implement the project:
-    1. TODO: Merge the original data scraping script for "BusinessWire"
+    1. [x] Merge the original data scraping script for "BusinessWire"
     2. TODO: Implement the API functionality
     3. TODO: Implement the data warehouse
     4. TODO: Implement the topic modelling
