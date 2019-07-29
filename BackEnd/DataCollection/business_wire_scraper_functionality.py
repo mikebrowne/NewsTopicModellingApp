@@ -131,6 +131,8 @@ def get_page_as_soup(url, browser):
     '''
     browser.get(url)
 
+    time.sleep(np.random.randint(1, 6))
+
     content = browser.page_source
 
     soup = BeautifulSoup(content, "lxml")

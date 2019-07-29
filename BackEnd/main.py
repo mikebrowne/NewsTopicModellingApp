@@ -6,10 +6,7 @@ import sys
 
 class BackEndInterface:
     def __init__(self):
-        sys.stdout.write("Starting BW Scraper")
         self.bw_scraper = BusinessWireScraper()
-
-        sys.stdout.write("Starting MW Scraper")
         self.mw_scraper = MarketWatchScraper(test=False)
 
     def get(self, company_name, ticker, date):
@@ -17,19 +14,10 @@ class BackEndInterface:
         article_data = self.bw_scraper.collect(company_name, ticker, date)
         article_data["company_name"] = company_name
 
-        sys.stdout.write("article keys before mw scraper: {}".format(article_data.keys()))
+        company_data = self.mw_scraper.collect(company_name, ticker)
+        for key, val in company_data.items():
+            article_data[key] = val
 
-        try:
-            company_data = self.mw_scraper.collect(company_name, ticker)
-            #for key, val in company_data.items():
-            #    article_data[key] = val
-
-            #article_data["Industry"] = self.mw_scraper.collect(company_name, ticker)
-
-        except Exception as e:
-            # would normally log e and if building an API, return a proper call
-            # will add this later on
-            print(str(e))
-            return None
+        article_data["Industry"] = self.mw_scraper.collect(company_name, ticker)
 
         return article_data
