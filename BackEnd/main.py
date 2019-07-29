@@ -23,6 +23,4 @@ class BackEndInterface:
         for key, val in company_data.items():
             article_data[key] = val
 
-        article_data["Industry"] = self.mw_scraper.collect(company_name, ticker)
-
         return article_data
