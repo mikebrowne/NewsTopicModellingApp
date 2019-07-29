@@ -15,7 +15,7 @@ class BackEndInterface:
         company_data = self.mw_scraper.collect(company_name, ticker)
         sys.stdout.write("Finished MW scraper... ")
 
-        if company_name["industry"] not in ["Biotechnology", "Pharmaceuticals"]:
+        if company_data["industry"] not in ["Biotechnology", "Pharmaceuticals"]:
             return "non-biopharma"
 
         sys.stdout.write("Starting BW scraper... ")
