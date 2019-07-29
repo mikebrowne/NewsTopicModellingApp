@@ -17,7 +17,7 @@ class BackEndInterface:
             #for key, val in company_data.items():
             #    article_data[key] = val
 
-            article_data["Industry"] = self.mw_scraper.collect(company_name, ticker)
+            #article_data["Industry"] = self.mw_scraper.collect(company_name, ticker)
 
         except Exception as e:
             # would normally log e and if building an API, return a proper call
