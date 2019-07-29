@@ -12,8 +12,7 @@ def get_data(soup):
     at_a_glance_div = soup.find("div", id="rightrail").find(class_="block")
     first_column = at_a_glance_div.find(class_="twowide addgutter")
     dict_results = [[item.text for item in div.find_all("p")]for div in first_column.find_all("div")]
-    #return {item[0].lower(): item[1] for item in dict_results if len(item)==2}
-    return str(dict_results)
+    return {item[0].lower(): item[1] for item in dict_results if len(item)==2}
 
 
 def get_page_as_soup(url, browser):
