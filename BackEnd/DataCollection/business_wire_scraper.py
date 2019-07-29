@@ -5,6 +5,7 @@
 '''
 
 from selenium import webdriver
+import sys
 from BackEnd.DataCollection.business_wire_scraper_functionality import find_article, scrape_articles
 
 
@@ -13,10 +14,15 @@ class BusinessWireScraper:
         pass
 
     def collect(self, company_name, ticker, date):
-        browser = self.open_browser()
-        article_search_results = self._scrape_individual_data__(company_name.lower(), ticker.upper(), date, browser)
-        browser.quit()
-        return article_search_results
+        try:
+            browser = self.open_browser()
+            article_search_results = self._scrape_individual_data__(company_name.lower(), ticker.upper(), date, browser)
+            browser.quit()
+            return article_search_results
+
+        except Exception as e:
+            sys.stdout.write("Time out - BW...", str(e))
+            return {}
 
     @staticmethod
     def open_browser():
@@ -33,7 +39,9 @@ class BusinessWireScraper:
         prefs = {'profile.managed_default_content_settings.images': 2}
         chrome_options.add_experimental_option("prefs", prefs)
 
-        return webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+        driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+        driver.implicitly_wait(15)
+        return driver
 
     @staticmethod
     def _scrape_individual_data__(company_name, ticker, date, browser):

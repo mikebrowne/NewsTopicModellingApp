@@ -7,6 +7,7 @@ the industry and sector of the company in question.
 
 from selenium import webdriver
 import os
+import sys
 
 from BackEnd.DataCollection.market_watch_scraper_functionality import scrape_site
 
@@ -16,14 +17,19 @@ class MarketWatchScraper:
         self.test = test
 
     def collect(self, company_name, ticker):
-        if self.test:
-            browser = self.open_test_browser()
-        else:
-            browser = self.open_browser()
+        try:
+            if self.test:
+                browser = self.open_test_browser()
+            else:
+                browser = self.open_browser()
 
-        article_search_results = self._scrape_data__(company_name.lower(), ticker.upper(), browser)
-        browser.quit()
-        return article_search_results
+            article_search_results = self._scrape_data__(company_name.lower(), ticker.upper(), browser)
+            browser.quit()
+            return article_search_results
+
+        except Exception as e:
+            sys.stdout.write("Time out - BW...", str(e))
+            return {}
 
     @staticmethod
     def open_test_browser():
@@ -39,7 +45,9 @@ class MarketWatchScraper:
         prefs = {'profile.managed_default_content_settings.images': 2}
         chrome_options.add_experimental_option("prefs", prefs)
 
-        return webdriver.Chrome(executable_path=chrome_driver, chrome_options=chrome_options)
+        driver = webdriver.Chrome(executable_path=chrome_driver, chrome_options=chrome_options)
+        driver.implicitly_wait(15)
+        return driver
 
     @staticmethod
     def open_browser():
@@ -56,7 +64,9 @@ class MarketWatchScraper:
         prefs = {'profile.managed_default_content_settings.images': 2}
         chrome_options.add_experimental_option("prefs", prefs)
 
-        return webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+        driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+        driver.implicitly_wait(15)
+        return driver
 
     @staticmethod
     def _scrape_data__(company_name, ticker, browser):
