@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, Response
-from data_collection import scrape
+#from data_collection import scrape
+from BackEnd.DataCollection.business_wire_scraper import test_function
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ def home():
 # Add scrape button
 @app.route('/response', methods=["POST"])
 def response():
-    data = scrape()
+    data = test_function()
 
     if data is not None:
         return render_template('index.html', data_=data)
