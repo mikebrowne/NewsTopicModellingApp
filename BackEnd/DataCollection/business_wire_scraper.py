@@ -4,9 +4,7 @@
 
 '''
 
-import os
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from BackEnd.DataCollection.business_wire_scraper_functionality import find_article, scrape_articles
 
 

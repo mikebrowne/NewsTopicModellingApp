@@ -1,8 +1,7 @@
 DESIGN DOC
 ----------
 
-I am re-building my News App because I was unable to get the data scraper to function
-with the way the structure was. After getting a smaller data scraping app to work, it
+This is a restructure of the NewsApp. After getting a smaller data scraping app to work, it
 seemed appropriate to simply start from a blank slate and build up from a functioning
 program.
 
@@ -12,6 +11,10 @@ July 28, 2019
     * Basically a copy of my private "FlaskWithWebScraper" repo.
 * Once the base is full functional, there will be several steps to implement the project:
     1. [x] Merge the original data scraping script for "BusinessWire"
-    2. TODO: Implement the API functionality
-    3. TODO: Implement the data warehouse
-    4. TODO: Implement the topic modelling
+    2. [x] Implement the API functionality
+    3. TODO: Build Exception Handling to ensure the following:
+        * Company is a biopharmaceutical company
+        * Company Exists
+        * If there is no news for the company, states so
+    4. TODO: Implement the data warehouse
+    5. TODO: Implement the topic modelling
