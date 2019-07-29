@@ -7,7 +7,7 @@ import sys
 class BackEndInterface:
     def __init__(self):
         self.bw_scraper = BusinessWireScraper()
-        self.mw_scraper = MarketWatchScraper(test=False)
+        self.mw_scraper = MarketWatchScraper()
 
     def get(self, company_name, ticker, date):
 
