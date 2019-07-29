@@ -10,6 +10,16 @@ from BackEnd.DataCollection.business_wire_scraper_functionality import find_arti
 
 class BusinessWireScraper:
     def __init__(self):
+        pass
+
+    def collect(self, company_name, ticker, date):
+        browser = self.open_browser()
+        article_search_results = self._scrape_individual_data__(company_name.lower(), ticker.upper(), date, browser)
+        browser.quit()
+        return article_search_results
+
+    @staticmethod
+    def open_browser():
         GOOGLE_CHROME_BIN = "/app/.apt/usr/bin/google-chrome"
         CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
 
@@ -23,12 +33,7 @@ class BusinessWireScraper:
         prefs = {'profile.managed_default_content_settings.images': 2}
         chrome_options.add_experimental_option("prefs", prefs)
 
-        self.chromedriver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
-
-    def collect(self, company_name, ticker, date):
-        browser = self.chromedriver
-        article_search_results = self._scrape_individual_data__(company_name.lower(), ticker.upper(), date, browser)
-        return article_search_results
+        return webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
     @staticmethod
     def _scrape_individual_data__(company_name, ticker, date, browser):
